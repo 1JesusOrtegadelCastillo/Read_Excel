@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ExcelFile</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="bg-primary">Importar Excel</h2>
+            <div class="alert alert-success alert-dismissible" role="alert" th:if="${successmessage}">
+                <strong th:text="${successmessage}"></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible" role="alert" th:if="${errormessage}">
+                <strong th:text="${errormessage}"></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" th:action="@{'/fileUpload'}" th:object="${excelFile}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="fileUpload">Seleccionar archivo</label>
+                    <input type="file" class="form-control-file" id="fileUpload" name="file" th:field="*{file}">
+                </div>
+                <button type="submit" class="btn btn-primary">Subir</button>
+            </form>
+        </div>
+        <td class="col-md-12">
+            <h2>Data</h2>
+            <table class="table">
+                <thead>
+                <tr class="bg-info">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Grado</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Calificacion</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="excelFile : ${excelFiles}">
+                    <td th:text="${excelFile.nombres}"></td>
+                    <td th:text="${excelFile.apellidoPaterno}"></td>
+                    <td th:text="${excelFile.apellidoMaterno}"></td>
+                    <td th:text="${excelFile.fechaDeNacimiento}"></td>
+                    <td th:text="${excelFile.grado}"></td>
+                    <td th:text="${excelFile.grupo}"></td>
+                    <td th:text="${excelFile.calificacion}"></td>
+                </tr>
+                </tbody>
+            </table>
+ <!-- ///// Cut from here /////-->
+            <table class="table">
+                <h3 class="mt-4">El alumno con la calificación más alta es:</h3>
+                <thead>
+                <tr class="bg-info">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${excelFiles.get(0).nombres}"></td>
+                    <td th:text="${excelFiles.get(0).apellidoPaterno}"></td>
+                    <td th:text="${excelFiles.get(0).apellidoMaterno}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table">
+                <h3 class="mt-4">El alumno con la calificación más baja es:</h3>
+                <thead>
+                <tr class="bg-info">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${excelFiles.get(excelFiles.size()-1).nombres}"></td>
+                    <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoPaterno}"></td>
+                    <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoMaterno}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <tr>
+                <p class="bg-info">Elementos en el archivo</p>
+                <!-- <td th:text="${excelFile.calificacion}"></td> -->
+                <span th:text="${#lists.size(excelFiles)}">[Number of Elements]</span>
+                <td th:with="result=${excelFile.calificacion} / ${#lists.size(excelFiles)}"></td>
+            </tr>
+
+<!-- ///// to here, run and paste again ///// -->
+
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
