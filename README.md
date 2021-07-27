@@ -1,3 +1,4 @@
+```
 Technologies:
 Spring Boot
 Thymeleaf
@@ -36,3 +37,4 @@ root
 |          |   
 |          └── application.yml
 └── pom.xml    
+```
