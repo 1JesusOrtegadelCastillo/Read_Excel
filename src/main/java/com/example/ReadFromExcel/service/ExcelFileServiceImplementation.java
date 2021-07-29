@@ -4,6 +4,7 @@ import com.example.ReadFromExcel.entity.ExcelFile;
 import com.example.ReadFromExcel.repository.ExcelFileRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class ExcelFileServiceImplementation implements ExcelFileService {
@@ -68,6 +69,8 @@ public class ExcelFileServiceImplementation implements ExcelFileService {
          excelFile.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
          excelFileRepository.save(excelFile);
 
+
+
         }
         return true;
     }
@@ -89,9 +92,8 @@ public class ExcelFileServiceImplementation implements ExcelFileService {
     }
 
     @Override
-    public Double avg() {
+    public double avg() {
         return excelFileRepository.avg();
     }
-
 
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface ExcelFileService {
     List<ExcelFile> findAll();
     boolean saveDataFromUploadFile(MultipartFile file);
-    public Double avg();
+    public double avg();
 }

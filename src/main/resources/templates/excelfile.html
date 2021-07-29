@@ -32,16 +32,17 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Subir</button>
             </form>
-        </div>
-        <td class="col-md-12">
+
+            <td class="col-md-12">
             <h2>Data</h2>
+
             <table class="table">
                 <thead>
                 <tr class="bg-info">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Paterno
                     <th scope="col">Apellido Materno</th>
                     <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Grado</th>
                     <th scope="col">Grupo</th>
                     <th scope="col">Calificacion</th>
@@ -59,51 +60,52 @@
                 </tr>
                 </tbody>
             </table>
- <!-- ///// Cut from here /////-->
-            <table class="table">
-                <h3 class="mt-4">El alumno con la calificación más alta es:</h3>
-                <thead>
-                <tr class="bg-info">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido Paterno</th>
-                    <th scope="col">Apellido Materno</th>
-                </tr>
-                </thead>
-                <tbody>
+
+            <!-- ///// Uncomment this section after excel file is uploaded and refresh web page
+
+                <table class="table">
+                    <h3 class="mt-4">El alumno con la calificación más alta es:</h3>
+                    <thead>
+                    <tr class="bg-info">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido Paterno</th>
+                        <th scope="col">Apellido Materno</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${excelFiles.get(0).nombres}"></td>
+                        <td th:text="${excelFiles.get(0).apellidoPaterno}"></td>
+                        <td th:text="${excelFiles.get(0).apellidoMaterno}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <h3 class="mt-4">El alumno con la calificación más baja es:</h3>
+                    <thead>
+                    <tr class="bg-info">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido Paterno</th>
+                        <th scope="col">Apellido Materno</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${excelFiles.get(excelFiles.size()-1).nombres}"></td>
+                        <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoPaterno}"></td>
+                        <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoMaterno}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
                 <tr>
-                    <td th:text="${excelFiles.get(0).nombres}"></td>
-                    <td th:text="${excelFiles.get(0).apellidoPaterno}"></td>
-                    <td th:text="${excelFiles.get(0).apellidoMaterno}"></td>
+                    <p class="bg-info">Elementos en el archivo</p>
+                    <span th:text="${#lists.size(excelFiles)}">[Number of Elements]</span>
+                    <td th:with="result=${excelFile.calificacion} / ${#lists.size(excelFiles)}"></td>
                 </tr>
-                </tbody>
-            </table>
 
-            <table class="table">
-                <h3 class="mt-4">El alumno con la calificación más baja es:</h3>
-                <thead>
-                <tr class="bg-info">
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido Paterno</th>
-                    <th scope="col">Apellido Materno</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td th:text="${excelFiles.get(excelFiles.size()-1).nombres}"></td>
-                    <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoPaterno}"></td>
-                    <td th:text="${excelFiles.get(excelFiles.size()-1).apellidoMaterno}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <tr>
-                <p class="bg-info">Elementos en el archivo</p>
-                <!-- <td th:text="${excelFile.calificacion}"></td> -->
-                <span th:text="${#lists.size(excelFiles)}">[Number of Elements]</span>
-                <td th:with="result=${excelFile.calificacion} / ${#lists.size(excelFiles)}"></td>
-            </tr>
-
-<!-- ///// to here, run and paste again ///// -->
+               -->
 
         </div>
     </div>

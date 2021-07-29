@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class ExcelFile implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,12 +18,12 @@ public class ExcelFile implements Serializable {
     private String fechaDeNacimiento;
     private int grado;
     private String grupo;
-    private int calificacion;
+    private double calificacion;
 
     @Transient
     private MultipartFile file;
 
-    public ExcelFile(String nombres, String apellidoPaterno, String apellidoMaterno, String fechaDeNacimiento, int grado, String grupo, int calificacion) {
+    public ExcelFile(String nombres, String apellidoPaterno, String apellidoMaterno, String fechaDeNacimiento, int grado, String grupo, double calificacion) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -83,11 +82,11 @@ public class ExcelFile implements Serializable {
         this.grupo = grupo;
     }
 
-    public int getCalificacion() {
+    public double getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(double calificacion) {
         this.calificacion = calificacion;
     }
 
@@ -105,11 +104,9 @@ public class ExcelFile implements Serializable {
     @Override
     public String toString() {
         return "ExcelFile{" +
-                ", La mejor es de: " +
                 ", nombres='" + nombres + '\'' +
                 ", apellidoPaterno='" + apellidoPaterno + '\'' +
                 ", apellidoMaterno='" + apellidoMaterno + '\'' +
-                ", calificacion=" + calificacion +
                 '}';
     }
 }
